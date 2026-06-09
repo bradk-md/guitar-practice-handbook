@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Guitar Practice Book - Ultimate Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #f8fafc; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .song-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        .song-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="text-slate-800 antialiased py-10 px-4">
+
+    <!-- Reusable SVG Definitions to keep the file compact -->
+    <svg class="hidden" width="0" height="0">
+        <defs>
+            <g id="grid-nut">
+                <line x1="20" y1="35" x2="120" y2="35" stroke="#1e293b" stroke-width="3"/>
+                <line x1="20" y1="60" x2="120" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="85" x2="120" y2="85" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="110" x2="120" y2="110" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="135" x2="120" y2="135" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="35" x2="20" y2="135" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="40" y1="35" x2="40" y2="135" stroke="#94a3b8" stroke-width="1.2"/>
+                <line x1="60" y1="35" x2="60" y2="135" stroke="#94a3b8" stroke-width="1"/>
+                <line x1="80" y1="35" x2="80" y2="135" stroke="#94a3b8" stroke-width="1"/>
+                <line x1="100" y1="35" x2="100" y2="135" stroke="#94a3b8" stroke-width="0.8"/>
+                <line x1="120" y1="35" x2="120" y2="135" stroke="#94a3b8" stroke-width="0.6"/>
+            </g>
+            <g id="grid-nonut">
+                <line x1="20" y1="35" x2="120" y2="35" stroke="#1e293b" stroke-width="1"/>
+                <line x1="20" y1="60" x2="120" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="85" x2="120" y2="85" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="110" x2="120" y2="110" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="135" x2="120" y2="135" stroke="#cbd5e1" stroke-width="1"/>
+                <line x1="20" y1="35" x2="20" y2="135" stroke="#94a3b8" stroke-width="1.5"/>
+                <line x1="40" y1="35" x2="40" y2="135" stroke="#94a3b8" stroke-width="1.2"/>
+                <line x1="60" y1="35" x2="60" y2="135" stroke="#94a3b8" stroke-width="1"/>
+                <line x1="80" y1="35" x2="80" y2="135" stroke="#94a3b8" stroke-width="1"/>
+                <line x1="100" y1="35" x2="100" y2="135" stroke="#94a3b8" stroke-width="0.8"/>
+                <line x1="120" y1="35" x2="120" y2="135" stroke="#94a3b8" stroke-width="0.6"/>
+            </g>
+            <text id="mx" y="31" class="fill-red-500 font-bold text-sm" style="text-anchor:middle;">×</text>
+            <circle id="mo" cy="30" r="3.5" class="stroke-slate-700 fill-none" stroke-width="1.5"/>
+            <circle id="dot" r="6.5" class="fill-blue-600"/>
+        </defs>
+    </svg>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden p-8">
+        <h1 class="text-4xl font-extrabold text-center text-slate-900 mb-2 tracking-tight">My Guitar Practice Book</h1>
+        <p class="text-center text-slate-500 mb-8 font-medium">A visual reference guide for chords, strumming patterns, and intro breakdowns.</p>
+        
+        <div class="text-center mb-10 border-b-2 border-slate-100 pb-8">
+            <select id="songSelect" onchange="showSong()" class="bg-slate-50 border border-slate-300 text-slate-900 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-2/3 mx-auto p-3 shadow-sm cursor-pointer outline-none transition duration-200">
+                <option value="">-- Choose a Song to Practice --</option>
+                <option value="supertramp">Give a Little Bit - Supertramp</option>
+                <option value="nirvana">About a Girl - Nirvana</option>
+                <option value="tompetty">Listen to Her Heart - Tom Petty</option>
+                <option value="overdose">Overdose - AC/DC</option>
+                <option value="helpless">Helpless - Neil Young</option>
+                <option value="tennessee">Tennessee Whiskey - Chris Stapleton</option>
+                <option value="heartofgold">Heart of Gold - Neil Young</option>
+                <option value="wishyouwerehere">Wish You Were Here - The Stellar Guitarist</option>
+                <option value="wishyouwerehere_justin">Wish You Were Here (Beginner) - JustinGuitar</option>
+                <option value="countryfeedback">Country Feedback - R.E.M.</option>
+            </select>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- GIVE A LITTLE BIT -->
+        <!-- ========================================== -->
+        <section id="supertramp" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Give a Little Bit</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">91 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by JustinGuitar</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> Focus entirely on the economy of motion. The gap between the <strong>A7</strong> and <strong>D</strong> chords is tiny, so hover your fingers close to the strings to ensure a clean, crisp transition.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <!-- A7 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A7</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mo" x="80"/><use href="#mo" x="120"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="72.5"/><text x="100" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text></svg>
+                    </div>
+                    <!-- D -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">D Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mx" x="40"/><use href="#mo" x="60"/><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="72.5"/><text x="120" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- G -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G Major</text><use href="#grid-nut"/><use href="#mo" x="60"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#dot" x="20" y="97.5"/><text x="20" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- A -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mo" x="120"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="72.5"/><text x="100" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">Fast acoustic rock feel:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: The Strike</span>
+                        <p class="text-xs text-slate-600">Form the <strong>A7</strong> shape. Strum heavily Down - Down.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: Quick Shift</span>
+                        <p class="text-xs text-slate-600">Quick shift to <strong>D</strong>. Strum Up - Up - Down - Up to finish out the measure.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: Repetition</span>
+                        <p class="text-xs text-slate-600">Repeat the A7 to D sequence twice.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Shift to G</span>
+                        <p class="text-xs text-slate-600">Shift to <strong>G</strong>. Strum Down - Down - Up - Up - Down - Up.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 5: The Walk</span>
+                        <p class="text-xs text-slate-600">Walk it up to <strong>A</strong>. Strum Down - Down - Up - Up - Down - Up. Repeat the whole cycle!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>Load the track up in Chordify to lock in the exact timing of the chord changes.</li>
+                        <li>Use your custom web-based metronome app to build up the tempo on the upbeat rhythm.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Play on a clean channel on the Spark Go to let the open strings ring out clearly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- ABOUT A GIRL -->
+        <!-- ========================================== -->
+        <section id="nirvana" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">About a Girl</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">121 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by Marty Music</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> For the chorus, keep your index, ring, and pinky locked in the power chord shape as you slide up and down the neck. <span class="underline">Do not lift your fingers completely off the strings!</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-4 text-center">
+                    <!-- Em -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">Em</text><use href="#grid-nut"/><use href="#mo" x="20"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#mo" x="120"/><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- G -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G Major</text><use href="#grid-nut"/><use href="#mo" x="60"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#dot" x="20" y="97.5"/><text x="20" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- C#5 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">C#5</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">4fr</text><use href="#grid-nonut"/><use href="#mx" x="20"/><use href="#mx" x="100"/><use href="#mx" x="120"/><use href="#dot" x="40" y="47.5"/><text x="40" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="80" y="97.5"/><text x="80" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- G#5 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G#5</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">4fr</text><use href="#grid-nonut"/><use href="#mx" x="80"/><use href="#mx" x="100"/><use href="#mx" x="120"/><use href="#dot" x="20" y="47.5"/><text x="20" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="40" y="97.5"/><text x="40" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- F#5 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">F#5</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">2fr</text><use href="#grid-nonut"/><use href="#mx" x="80"/><use href="#mx" x="100"/><use href="#mx" x="120"/><use href="#dot" x="20" y="47.5"/><text x="20" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="40" y="97.5"/><text x="40" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">Driving eighth notes:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: The Verse Groove</span>
+                        <p class="text-xs text-slate-600">Start on the open <strong>Em</strong> chord. Hit the lower strings heavily with two Down strums.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: Transition to G</span>
+                        <p class="text-xs text-slate-600">Catch the upstroke as you land the <strong>G</strong> chord: Down-Up, Down-Up. Let all strings ring.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: The Chorus Climb</span>
+                        <p class="text-xs text-slate-600">Slide your power chord grip to the 4th fret A string for <strong>C#5</strong>. Strum Down-Down.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Drop to G#5</span>
+                        <p class="text-xs text-slate-600">Drop to the thick E string, 4th fret for <strong>G#5</strong>. Strum Down-Down.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 5: Slide to F#5</span>
+                        <p class="text-xs text-slate-600">Slide down two frets to <strong>F#5</strong>. Strum Down-Down-Up-Down-Up.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>The verse uses open chords with a loose, slightly syncopated feel. Keep the wrist relaxed.</li>
+                        <li>Keep the strumming hand moving constantly like a pendulum to maintain that gritty groove.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Kick on a bit of crunch on the Spark Go amp for the chorus sections to get that authentic 90s drive.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- LISTEN TO HER HEART -->
+        <!-- ========================================== -->
+        <section id="tompetty" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Listen to Her Heart</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">124 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by Lauren Bateman</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> The <strong>F#m</strong> Barre requires leverage. Squeeze with your thumb firmly behind the neck, and ensure your index finger is perfectly straight applying even pressure.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <!-- A -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mo" x="120"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="72.5"/><text x="100" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text></svg>
+                    </div>
+                    <!-- F#m -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">F#m</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">2fr</text><use href="#grid-nonut"/><rect x="15" y="42.5" width="110" height="10" rx="5" fill="#2563eb" opacity="0.8"/><use href="#dot" x="40" y="97.5"/><text x="40" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- D -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">D Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mx" x="40"/><use href="#mo" x="60"/><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="72.5"/><text x="120" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- E -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">E Major</text><use href="#grid-nut"/><use href="#mo" x="20"/><use href="#mo" x="100"/><use href="#mo" x="120"/><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="80" y="47.5"/><text x="80" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">Classic Rock 4/4:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: Anchor the A</span>
+                        <p class="text-xs text-slate-600">Anchor on the open <strong>A</strong> major chord. Strum Down - Down. Let the jangle happen.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: The Barre Drop</span>
+                        <p class="text-xs text-slate-600">Brace your index finger for the barre and drop into <strong>F#m</strong>. Strum Up - Up - Down - Up. Make sure the high strings aren't deadened.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: Release to D</span>
+                        <p class="text-xs text-slate-600">Release the barre and jump to open <strong>D</strong>. Strum Down - Down.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Shift to E</span>
+                        <p class="text-xs text-slate-600">Shift fingers to <strong>E</strong> major. Strum Up - Up - Down - Up.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>Pay close attention to the driving jangle-pop feel. The rhythm needs to stay consistently tight.</li>
+                        <li>If the barre chords get tiring, practice those capo-based shortcuts using G and Am shapes to keep the session going.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Sounds great dialed in with a classic rock tone. Switch to the bridge or middle pickup for bite.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- OVERDOSE -->
+        <!-- ========================================== -->
+        <section id="overdose" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Overdose</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">128 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by The Stellar Guitarist</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> Fret Hand Muting. This song relies on silence as much as sound. Mute the unused strings with your index finger so <strong>only</strong> the intended power chord notes ring out.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <!-- A5 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A5</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mx" x="100"/><use href="#mx" x="120"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- C5 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">C5</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">3fr</text><use href="#grid-nonut"/><use href="#mx" x="20"/><use href="#mx" x="100"/><use href="#mx" x="120"/><use href="#dot" x="40" y="47.5"/><text x="40" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="80" y="97.5"/><text x="80" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- D5 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">D5</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">5fr</text><use href="#grid-nonut"/><use href="#mx" x="20"/><use href="#mx" x="100"/><use href="#mx" x="120"/><use href="#dot" x="40" y="47.5"/><text x="40" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="80" y="97.5"/><text x="80" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- G5 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G5</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">3fr</text><use href="#grid-nonut"/><use href="#mx" x="80"/><use href="#mx" x="100"/><use href="#mx" x="120"/><use href="#dot" x="20" y="47.5"/><text x="20" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="40" y="97.5"/><text x="40" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">Heavy, staccato downstrokes:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: The A5 Hit</span>
+                        <p class="text-xs text-slate-600">Start on the open <strong>A5</strong> power chord. Hit it hard with a single Downstroke and immediately mute the strings with your right hand palm.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: Jump to C5</span>
+                        <p class="text-xs text-slate-600">Jump to the <strong>C5</strong> power chord on the 3rd fret A string. Downstroke and mute.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: Slide to D5</span>
+                        <p class="text-xs text-slate-600">Slide up two frets to <strong>D5</strong>. Downstroke and mute.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Drop to G5</span>
+                        <p class="text-xs text-slate-600">Drop to the thick E string 3rd fret for <strong>G5</strong>. Downstroke, mute, and jump immediately back to the open A5 to restart the riff.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>This is a fantastic workout for locking in those power chords. Keep your grip firm but relaxed enough to slide quickly.</li>
+                        <li>The rhythm is very deliberate. Hit the chords hard and cut them off cleanly to match the groove.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Dial up the gain on your amplifier and switch over to the bridge pickup for maximum bite.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- HELPLESS -->
+        <!-- ========================================== -->
+        <section id="helpless" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Helpless</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">58 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by Lauren Bateman</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> Let it Breathe. This is a beautifully simple progression. Focus on a very relaxed, swaying rhythm. <strong>Don't rush the tempo</strong>; let the chords ring out naturally.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-3 gap-4 text-center max-w-lg">
+                    <!-- D -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">D Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mx" x="40"/><use href="#mo" x="60"/><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="72.5"/><text x="120" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- A -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mo" x="120"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="72.5"/><text x="100" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text></svg>
+                    </div>
+                    <!-- G -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G Major</text><use href="#grid-nut"/><use href="#mo" x="60"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#dot" x="20" y="97.5"/><text x="20" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">Slow, sweeping 4/4 time:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: The Sweeping D</span>
+                        <p class="text-xs text-slate-600">Start on the open <strong>D</strong> chord. Give it a slow, sweeping Down strum, followed by a lighter Down-Up to fill out the measure.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: Transition to A</span>
+                        <p class="text-xs text-slate-600">Transition to the open <strong>A</strong> chord. Keep the same relaxed rhythm: Down, Down-Up.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: Linger on G</span>
+                        <p class="text-xs text-slate-600">Switch to <strong>G</strong>. Because the G lasts twice as long in the progression, play the full pattern: Down, Down-Up, Down, Down-Up.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Repeat the Loop</span>
+                        <p class="text-xs text-slate-600">Repeat indefinitely! The entire song sits on this beautiful D-A-G loop.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>A great endurance exercise for clean transitions.</li>
+                        <li>Try throwing in some gentle arpeggiations (picking individual notes within the chord) on the G chord to add flavor.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Keep the tone warm and clean. Select the neck pickup for a fuller, rounder sound.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TENNESSEE WHISKEY -->
+        <!-- ========================================== -->
+        <section id="tennessee" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Tennessee Whiskey</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">49 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by Lauren Bateman</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> The 6/8 Waltz Swing. The song has a very distinct, soulful 6/8 swing. Think in groups of three (<span class="underline">1-2-3, 4-5-6</span>) and accentuate the first beat of each measure to lock into that R&B groove.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-2 gap-4 text-center max-w-xs">
+                    <!-- A -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mo" x="120"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="72.5"/><text x="100" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text></svg>
+                    </div>
+                    <!-- Bm -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">Bm</text><text x="8" y="47.5" class="font-bold text-[10px] fill-slate-500">2fr</text><use href="#grid-nonut"/><use href="#mx" x="20"/><rect x="35" y="42.5" width="90" height="10" rx="5" fill="#2563eb" opacity="0.8"/><use href="#dot" x="60" y="97.5"/><text x="60" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="80" y="97.5"/><text x="80" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text><use href="#dot" x="100" y="72.5"/><text x="100" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">Slow 6/8 waltz feel:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: Anchor the A</span>
+                        <p class="text-xs text-slate-600">Anchor on the open <strong>A</strong> chord. Think in counts of 3. Strum Down-Up-Down-Up-Down-Up for two full measures. Accentuate the first beat heavily.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: Prepare for the Jump</span>
+                        <p class="text-xs text-slate-600">Prepare for the big jump. Lock in your index finger across the 2nd fret and clamp down the <strong>Bm</strong> shape.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: Hold the Bm</span>
+                        <p class="text-xs text-slate-600">Hold the Bm for the same duration. Down-Up-Down-Up-Down-Up for two measures.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Release and Repeat</span>
+                        <p class="text-xs text-slate-600">Release the barre and fall back to the open A. Take your time, letting the 6/8 swing guide the transition.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>This is the ultimate song to master that Bm chord we've been tackling. Squeeze tight and make sure the A string is ringing clearly.</li>
+                        <li>Load it up in Chordify to really get a feel for how long each chord lingers before the change.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Add a touch of reverb on your Spark Go and use the middle pickup position for a balanced, throaty R&B tone.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- HEART OF GOLD -->
+        <!-- ========================================== -->
+        <section id="heartofgold" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Heart of Gold</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">85 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by JustinGuitar</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> Anchoring Fingers. Watch the quick transitions in the chorus. The move from Em to C to D to G happens relatively fast. Practice <strong>anchoring your fingers</strong> where possible to make the changes smoother.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <!-- Em -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">Em</text><use href="#grid-nut"/><use href="#mo" x="20"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#mo" x="120"/><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- C -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">C Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="80"/><use href="#mo" x="120"/><use href="#dot" x="40" y="97.5"/><text x="40" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="47.5"/><text x="100" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text></svg>
+                    </div>
+                    <!-- D -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">D Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mx" x="40"/><use href="#mo" x="60"/><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="72.5"/><text x="120" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- G -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G Major</text><use href="#grid-nut"/><use href="#mo" x="60"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#dot" x="20" y="97.5"/><text x="20" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">Classic driving acoustic:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: The Iconic Intro</span>
+                        <p class="text-xs text-slate-600">Start on <strong>Em</strong>. Strum a solid Downstroke. Let it ring for a beat.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: Quick Fill</span>
+                        <p class="text-xs text-slate-600">Follow with a quick Down-Up, Down-Up on the Em.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: Shift to D</span>
+                        <p class="text-xs text-slate-600">Shift immediately to <strong>D</strong>. Strum a single, sharp Downstroke.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Resolve the Phrase</span>
+                        <p class="text-xs text-slate-600">Quickly shift to <strong>Em</strong> for one final sharp Downstroke to resolve the phrase.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 5: The Chorus Run</span>
+                        <p class="text-xs text-slate-600">For the Chorus, follow the rapid sequence: <strong>Em</strong> (Down-Down) to <strong>C</strong> (Up-Down-Up) to <strong>D</strong> (Down-Down) to <strong>G</strong> (Up-Down-Up).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>Keep the strumming hand bouncing naturally. The acoustic drive of this song relies on a very consistent right-hand motion.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Roll off the tone knob just a bit to mimic a warm acoustic resonance while playing clean.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- WISH YOU WERE HERE (The Stellar Guitarist) -->
+        <!-- ========================================== -->
+        <section id="wishyouwerehere" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Wish You Were Here</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">62 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by The Stellar Guitarist</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> Amber stresses that before you pick a single note, you must <span class="underline">"glue"</span> your <strong>third (ring) finger</strong> and <strong>fourth (pinky) finger</strong> down on the 3rd fret of the B and high E strings. Keep them completely anchored throughout this entire sequence!
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-3 gap-4 text-center max-w-lg">
+                    <!-- Em7 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">Em7</text><use href="#grid-nut"/><use href="#mo" x="20"/><use href="#mo" x="80"/><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- G -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G Major</text><use href="#grid-nut"/><use href="#mo" x="60"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#dot" x="20" y="97.5"/><text x="20" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- A7sus4 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A7sus4</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mo" x="80"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Fill Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">When transitioning between licks, fill the chord space with this rhythm phrase:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+
+                <div class="mb-6">
+                    <h4 class="font-semibold text-slate-700 text-base mb-2">Part 1: Primary Loop (Repeat Twice)</h4>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: The Entry Lick</span>
+                            <p class="text-xs text-slate-600 mb-3">Pick fret 3 on Low E (finger 2). Pluck open A, immediately <strong>hammer-on</strong> to fret 2 (finger 1). Hit open D.</p>
+                            <pre class="font-mono bg-slate-900 text-teal-400 p-3 rounded text-xs leading-none overflow-x-auto shadow-inner">e|-----------------------|
+B|----3------------------|
+G|----0------------------|
+D|----0-----------0------|
+A|---------0_2-----------|
+E|----3------------------|</pre>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: Hit the Em7 Fill</span>
+                            <p class="text-xs text-slate-600">Drop finger 1 onto fret 2 of the D string. Strum the 8-beat pattern (<span class="text-blue-600 font-bold">D D U U D D U U</span>), starting downward from the D string.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: The Resolving Walk</span>
+                            <p class="text-xs text-slate-600 mb-3">With your fingers remaining in the shape, execute this single-note line across the D and G strings:</p>
+                            <pre class="font-mono bg-slate-900 text-teal-400 p-3 rounded text-xs leading-none overflow-x-auto shadow-inner">D|----2----0----2----0----|</pre>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Hit the G Major Fill</span>
+                            <p class="text-xs text-slate-600">Form a full G Major layout (leaving the bottom two strings anchored) and execute the full 8-beat pattern.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h4 class="font-semibold text-slate-700 text-base mb-2">Part 2: Routing into the A7sus4 Change</h4>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 5: Rerun & Em7 Drop</span>
+                            <p class="text-xs text-slate-600">Rerun the exact structural lick from <strong>Step 1</strong>, then execute the full strum across the <strong>Em7 layout</strong>.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 6: Descending Transition Lick</span>
+                            <p class="text-xs text-slate-600 mb-3">Walk your pick backward from the D string up to the A string using this run:</p>
+                            <pre class="font-mono bg-slate-900 text-teal-400 p-3 rounded text-xs leading-none overflow-x-auto shadow-inner">D|----2----0--------------|
+A|--------------2----0----|</pre>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 7: Drop into A7sus4</span>
+                            <p class="text-xs text-slate-600">Press down across the 2nd frets of the D and G strings. Strike the chord using your core 8-beat framework.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-semibold text-slate-700 text-base mb-2">Part 3: The Climax Outro</h4>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 8: Extended A7sus4 Strumming Run</span>
+                            <p class="text-xs text-slate-600 mb-2">Repeat the entry loop back to the A7sus4. To build dynamic tension like Amber, stretch the strum layout to this sequence:</p>
+                            <div class="font-bold text-[10px] text-teal-700 bg-teal-50 border border-teal-100 inline-block px-2 py-1 rounded">
+                                D • D • U • U • D • D • U • D • U • D • D • U • U
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 9: Resolution</span>
+                            <p class="text-xs text-slate-600">Shift squarely back to a standard G Major chord with an open rolling cadence to move cleanly into the main vocal tracking lines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200 mt-8">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>Load the track up in Chordify to lock in the exact timing of the chord changes when the main vocal verses begin.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Dial in a very clean, warm acoustic-style setting. On the Strat, flip to the neck pickup for maximum warmth to emulate that acoustic resonance.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- WISH YOU WERE HERE (JustinGuitar Beginner) -->
+        <!-- ========================================== -->
+        <section id="wishyouwerehere_justin" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Wish You Were Here (Beginner)</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">62 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Phase 1 Breakdown • As Taught by JustinGuitar</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> Much like other versions, Justin emphasizes keeping fingers 3 and 4 anchored to the 3rd fret on strings 1 and 2 (e and B strings). This acts as your base for the entire riff.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-3 gap-4 text-center max-w-lg">
+                    <!-- Em7 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">Em7</text><use href="#grid-nut"/><use href="#mo" x="20"/><use href="#mo" x="80"/><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- G -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G Major</text><use href="#grid-nut"/><use href="#mo" x="60"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#dot" x="20" y="97.5"/><text x="20" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- A7sus4 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">A7sus4</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="40"/><use href="#mo" x="80"/><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown (Phase 1 Beginner)</h3>
+
+                <div class="mb-6">
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: The First Riff to Em7</span>
+                            <p class="text-xs text-slate-600 mb-3">With your anchor fingers in place on fret 3, pick the open A string, hammer-on to fret 2 with your index finger, then pick the open D string. Follow immediately by strumming down on your Em7 shape.</p>
+                            <pre class="font-mono bg-slate-900 text-teal-400 p-3 rounded text-xs leading-none overflow-x-auto shadow-inner">e|------3---|
+B|------3---|
+G|------0---|
+D|---0--2---|
+A|-0h2--2---|
+E|------0---|</pre>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: The Walk to G</span>
+                            <p class="text-xs text-slate-600 mb-3">Next, pick the 2nd fret on the D string (using your middle finger), then pick the open D string. Move to pick the 2nd fret on the A string, then strum the full G Major shape.</p>
+                            <pre class="font-mono bg-slate-900 text-teal-400 p-3 rounded text-xs leading-none overflow-x-auto shadow-inner">e|-----------3---|
+B|-----------3---|
+G|-----------0---|
+D|-2--0------0---|
+A|-------2---2---|
+E|-----------3---|</pre>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: Repeat First Riff</span>
+                            <p class="text-xs text-slate-600">Exactly the same as Step 1. Pick open A, hammer-on the 2nd fret, pick open D, and strum Em7.</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: The Walk to A7sus4</span>
+                            <p class="text-xs text-slate-600 mb-3">Pick the 2nd fret on the D string, then open D string. Next, pick the 2nd fret on the A string, then open A string. Strum the A7sus4 chord.</p>
+                            <pre class="font-mono bg-slate-900 text-teal-400 p-3 rounded text-xs leading-none overflow-x-auto shadow-inner">e|---------------3---|
+B|---------------3---|
+G|---------------2---|
+D|-2--0----------2---|
+A|-------2--0----0---|
+E|-------------------|</pre>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                            <span class="font-bold text-sm text-slate-900 block mb-1">Step 5: The Final Walk to G</span>
+                            <p class="text-xs text-slate-600 mb-3">To wrap up the beginner loop, pick the 2nd fret on the A string, then open A string, and finally the 3rd fret on the Low E string as you strum back into G Major.</p>
+                            <pre class="font-mono bg-slate-900 text-teal-400 p-3 rounded text-xs leading-none overflow-x-auto shadow-inner">e|-------------3---|
+B|-------------3---|
+G|-------------0---|
+D|-------------0---|
+A|-2--0--------2---|
+E|-------3-----3---|</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200 mt-8">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>Focus on getting the single notes to ring clearly while keeping fingers 3 and 4 completely stationary.</li>
+                        <li>This simplified version helps you map out the notes before diving into the complex strumming pattern taught in the advanced version.</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Keep it acoustic-focused. Practice without distortion to ensure every picked string is articulate and clean.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- COUNTRY FEEDBACK -->
+        <!-- ========================================== -->
+        <section id="countryfeedback" class="song-section mb-12">
+            <header class="mb-6">
+                <h2 class="font-bold text-3xl text-slate-900 tracking-tight">Country Feedback</h2>
+                <div class="flex items-center gap-3 mt-2">
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2.5 py-1 rounded-md border border-indigo-200">74 BPM</span>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Intro Breakdown • As Taught by John McNicholas</p>
+                </div>
+            </header>
+
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-md mb-8 shadow-sm">
+                <div class="flex">
+                    <div class="ml-3 text-sm text-blue-800">
+                        <span class="font-bold">The Golden Rule:</span> Not only is this your first verse, it's every verse. The progression repeats over and over until the very end, making it an incredibly easy song to lock into.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Required Chord Shapes</h3>
+                <div class="grid grid-cols-3 md:grid-cols-5 gap-4 text-center">
+                    <!-- Em -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">Em</text><use href="#grid-nut"/><use href="#mo" x="20"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#mo" x="120"/><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- G -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">G Major</text><use href="#grid-nut"/><use href="#mo" x="60"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#dot" x="20" y="97.5"/><text x="20" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="40" y="72.5"/><text x="40" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="120" y="97.5"/><text x="120" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">4</text></svg>
+                    </div>
+                    <!-- D -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">D Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mx" x="40"/><use href="#mo" x="60"/><use href="#dot" x="80" y="72.5"/><text x="80" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text><use href="#dot" x="100" y="97.5"/><text x="100" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="120" y="72.5"/><text x="120" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                    <!-- C -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">C Major</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="80"/><use href="#mo" x="120"/><use href="#dot" x="40" y="97.5"/><text x="40" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text><use href="#dot" x="100" y="47.5"/><text x="100" y="51" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">1</text></svg>
+                    </div>
+                    <!-- Cmaj7 -->
+                    <div class="bg-white p-3 rounded-xl shadow-sm border border-slate-100 flex flex-col items-center">
+                        <svg class="w-24 h-28" viewBox="0 0 140 160"><text x="70" y="20" class="font-bold text-sm fill-slate-800" style="text-anchor:middle;">Cmaj7</text><use href="#grid-nut"/><use href="#mx" x="20"/><use href="#mo" x="80"/><use href="#mo" x="100"/><use href="#mo" x="120"/><use href="#dot" x="40" y="97.5"/><text x="40" y="101" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">3</text><use href="#dot" x="60" y="72.5"/><text x="60" y="76" class="text-[10px] fill-white font-bold" style="text-anchor:middle;">2</text></svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-2">The Rhythm Pattern</h3>
+                <p class="text-sm text-slate-600 mb-3">A steady acoustic strumming pattern with quick passing hits:</p>
+                <div class="flex flex-wrap gap-1 font-bold text-[10px] uppercase tracking-wider">
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                    <span class="bg-blue-600 text-white px-2 py-1 rounded shadow-sm">Down</span>
+                    <span class="bg-sky-500 text-white px-2 py-1 rounded shadow-sm">Up</span>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <h3 class="font-bold text-lg text-slate-800 mb-4">Strum-by-Strum Breakdown</h3>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 1: Em to G</span>
+                        <p class="text-xs text-slate-600">Form the <strong>Em</strong> chord and strum Down twice (Down - Down). On the final beat before changing, hit a quick Up strum on your way to <strong>G</strong>. Land on <strong>G</strong> and strum Down twice (Down - Down).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 2: D to C</span>
+                        <p class="text-xs text-slate-600">Transition to <strong>D</strong> with a quick Up strum, then strum Down twice on the D (Down - Down). Hit another quick Up strum on the transition, then land on <strong>C</strong>. The C chord lasts twice as long, so strum it out fully: Down - Down - Up - Down - Up.</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 3: The Turnaround (G to D)</span>
+                        <p class="text-xs text-slate-600">Restart the momentum by shifting back to <strong>G</strong> and strumming Down twice (Down - Down). Catch the transition with an Up strum, then form the <strong>D</strong> chord and strum Down twice (Down - Down).</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl border border-slate-200/60 shadow-sm">
+                        <span class="font-bold text-sm text-slate-900 block mb-1">Step 4: Resolve on Cmaj7</span>
+                        <p class="text-xs text-slate-600">Hit a quick Up strum as you transition, then land on <strong>Cmaj7</strong> (standard C shape with the index finger lifted). Let this dreamy chord ring out for the full measure by strumming Down - Down - Up - Down - Up. Repeat the entire sequence!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-xl border border-slate-200">
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Practice Notes</h4>
+                    <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+                        <li>The shift from C to Cmaj7 in the second half of the phrase simply requires lifting your index finger. Take advantage of this simple, beautiful change!</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-800 mb-2 text-sm uppercase tracking-wider">Gear Note</h4>
+                    <p class="text-sm text-slate-600 italic bg-white p-3 rounded border border-slate-200 shadow-sm">🎸 Keep the acoustic tone bright. Let the open strings on that Cmaj7 ring out fully to capture the R.E.M. vibe.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        function showSong() {
+            var cards = document.getElementsByClassName('song-section');
+            for (var i = 0; i < cards.length; i++) {
+                cards[i].classList.remove('active');
+            }
+            var select = document.getElementById('songSelect');
+            var selectedValue = select.value;
+            if (selectedValue) {
+                var el = document.getElementById(selectedValue);
+                if(el) {
+                    el.classList.add('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
